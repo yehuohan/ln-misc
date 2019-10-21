@@ -16,6 +16,14 @@ mod = SourceModule("""
     {
         int idx = threadIdx.x + threadIdx.y * 4;
         a[idx] *= 2;
+        /*
+        a[0] = gridDim.x;
+        a[1] = gridDim.y;
+        a[2] = gridDim.z;
+        a[3] = blockDim.x;
+        a[4] = blockDim.y;
+        a[5] = blockDim.z;
+        */
     }
         """)
 func = mod.get_function('doublify') # 获取GPU函数
@@ -29,12 +37,13 @@ print(type(func))
 a = (10*np.random.randn(4, 4)).astype(np.int32)
 a_gpu = cuda.mem_alloc(a.nbytes)    # 申请显存
 cuda.memcpy_htod(a_gpu, a)          # 复制主机数据到GPU设备(host to device)
-func(a_gpu, block=(4, 4, 1))
+func(a_gpu, grid=(1, 1, 1), block=(4, 4, 1))
 # func(cuda.InOut(a), block=(4, 4, 1)) # 使用cuda.InOut，代码更简洁
 a_doubled = np.empty_like(a)
 cuda.memcpy_dtoh(a_doubled, a_gpu)  # 从GPU设备复制数据到主机(device to host)
 print(a)
-print(a_doubled)
+# print(a_doubled)
+print(a_doubled.ravel())
 
 
 #%% 使用GPUArray
