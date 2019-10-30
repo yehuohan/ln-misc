@@ -99,9 +99,9 @@ print(np.dot(a[2, :], b[2, :]))
 print(np.tensordot(a, b, axes=[(1,), (1,)]))
 # tensordot: 取a[,:]与b[,:]做dot
 print(np.dot(a.reshape(1, 3, 2), b.reshape(1, 2, 3)))
-# dot: a的第n-1维作为向量(1x3个2维向量)，与b的第n-2维作为向量(1x3个2维向量)做dot
+# dot: a的第n-1维作为向量(1x3个2维向量)，与b的第n-2维作为向量(1x3个2维向量)做dot，得到[1x3 x 1x3]
 print(np.matmul(a.reshape(3, 1, 2), b.reshape(3, 2, 1)).ravel())
-# matmul: 取a和b的n-1和n-2维作为矩阵再做multiply（即3个1x2的矩阵与3个2x1的矩阵multiply）
+# matmul: 取a和b的n-1和n-2维作为矩阵再做multiply（即3个1x2的矩阵与3个2x1的矩阵multiply），得到(3 x 1x1)
 c1 = np.empty(3)
 for k in np.arange(3):
     c1[k] = np.dot(a[k], b[k])
