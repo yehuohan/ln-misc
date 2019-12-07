@@ -8,7 +8,7 @@ class GradientDescent:
     def __init__(self, gfx):
         """初始化参数
         :Parameters:
-            - gfx: 目录标函数
+            - gfx: 目标函数的梯度函数
         """
         self.gfx = gfx
         self.xs_path = []
