@@ -7,12 +7,39 @@
 #include <regex>
 #include <string>
 #include <type_traits>
+#include <functional>
 
 typedef struct S_s {
     int a;
     char b;
     double c;
 }S_t;
+
+// 可变模板参数解包的终止函数
+void print() {}
+// 可变模板参数
+template<typename T, typename ... Args>
+void print(T first, Args ... last) {
+    std::cout << first;
+    print(last...);
+}
+
+template<typename T>
+void output(T a) {
+    std::cout << a;
+}
+template<typename ... Args>
+void output(Args ... args) {
+    // 数组初始化列表
+    int res[] = {(output(args), 0)...};
+}
+
+// enum class
+//enum SideOld { Left, Right };
+//enum BoolOld { Wrong, Right };
+enum class Side { Left, Right };
+enum class Bool { Wrong, Right };
+enum class Colo : char {Center, Right};
 
 int main(int argc, char *argv[])
 {
@@ -49,7 +76,15 @@ int main(int argc, char *argv[])
     std::cout << mp["second"] << std::endl;
 
     // type_traits
+    std::cout << std::boolalpha;
     std::cout << std::is_void<void>::value << std::endl;
+    std::cout << std::is_same<char, Colo>::value << std::endl;
+    std::cout << std::is_same<char, std::underlying_type<Colo>::type>::value << std::endl;
+
+    // 可变模板参数
+    print(10, "test", 1.23, true, false, 'c');
+    std::cout << std::endl;
+    output(10, "test", 1.23, true, false, 'c');
 
     /* c++17 */
 #if 0
