@@ -8,6 +8,9 @@
 #include <string>
 #include <type_traits>
 #include <functional>
+#include <thread>
+#include <chrono>
+#include <future>
 
 typedef struct S_s {
     int a;
@@ -40,6 +43,13 @@ void output(Args ... args) {
 enum class Side { Left, Right };
 enum class Bool { Wrong, Right };
 enum class Colo : char {Center, Right};
+
+// 异步执行函数
+std::string hello_async(const std::string& str, int sec) {
+    std::this_thread::sleep_for(std::chrono::seconds(sec));
+    std::cout << str << std::endl;
+    return "Hello from " + str + '\n';
+}
 
 int main(int argc, char *argv[])
 {
@@ -84,7 +94,23 @@ int main(int argc, char *argv[])
     // 可变模板参数
     print(10, "test", 1.23, true, false, 'c');
     std::cout << std::endl;
-    output(10, "test", 1.23, true, false, 'c');
+    output(10, "test", 1.23, true, false, 'c', '\n');
+
+    // 异步执行
+    auto async_f = std::async(std::launch::async, hello_async, "function", 3);
+    int async_cnt = 0;
+    std::future_status status;
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::cout << "async_cnt: " << async_cnt++ << std::endl;
+
+        status = async_f.wait_for(std::chrono::milliseconds(10));
+        if (status == std::future_status::ready) {
+            std::cout << async_f.get();
+            break;
+        }
+    }
+
 
     /* c++17 */
 #if 0
