@@ -147,7 +147,7 @@ print(b.ravel())
 from numba import cuda
 import numpy as np
 import os
-os.environ['CUDA_HOME'] = r'C:/MyApps/cuda/v9.2/Development'
+os.environ['CUDA_HOME'] = r'C:/apps/cuda/v9.2/Development'
 
 @cuda.jit
 def inc(a):
