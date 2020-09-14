@@ -1,7 +1,8 @@
 
 #include <stdio.h>
-#include <errno.h>
+#include <stdbool.h>
 #include <stdint.h>
+#include <errno.h>
 #include <dlfcn.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -11,11 +12,11 @@
 
 typedef int(*func)(int);
 
-int loop = 1;
+bool loop = true;
 
 void signal_handler_loop(int sig) {
     if (SIGINT == sig)
-        loop = 0;
+        loop = false;
 }
 
 int task() {
@@ -50,24 +51,28 @@ int task() {
 int main() {
     signal(SIGINT, signal_handler_loop);
 
+    bool is_parent = true;
     int cnt = 0;
-    while (1) {
+    while (is_parent && cnt < 100) { // 只有父进程，才会执行while循环
         printf("fork cnt: %d\n", ++cnt);
-        loop = 1;
-        pid_t pid;
-        pid = fork();
+        loop = true; // 子进程可能办为loop退出，需要在父进程重置loop
+        pid_t pid = fork();
 
+        // 父子进程的代码逻辑是一样的，只是pid值不同
         if (pid < 0) {
             printf("Failed to fork\n");
         } else if (pid > 0) {
+            is_parent = true; // 将父进程中的is_parent置为true
             printf("This is parent process: %d\n", getpid());
             // code executed in parent process
             int status;
             waitpid(pid, &status, 0);
         } else {
+            is_parent = false; // 将子进程中的is_parent置为true，防止子进程再次fork出子进程的子进程
             printf("This is child process: %d of %d\n", getpid(), getppid());
             // code executed in child process
             task();
         }
+        printf("End from %s\n", is_parent ? "parent" : "child");
     }
 }
