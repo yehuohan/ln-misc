@@ -10,5 +10,6 @@ __pycache__
 !code
 !exercise
 !gists
-!notes
+!rust
+rust/target
 !.gitignore
