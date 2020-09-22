@@ -6,7 +6,7 @@
 #[allow(unused_assignments)] // 允许未使用的赋值（作用于函数）
 fn ln_mut() {
     let var = 1;
-    //var = 2; // error 非mut变量不能修改值
+    //var = 2; // error: 非mut变量不能修改值
     let var = 3; // 但是可以为变量重新赋值
     println!("{}", var);
 
@@ -47,9 +47,10 @@ fn ln_type() {
 
     /* function */
     fn add(args: i32, brgs: u16) -> usize {
-        return (args + (brgs as i32)) as usize;
+        //return (args + (brgs as i32)) as usize;   // statement末尾有';'
+        (args + (brgs as i32)) as usize             // expression末尾没有';'，expression的值会返回，相当有return
     }
-    println!("{}", add(-2, 1));
+    println!("add(-2, 1): {}", add(-2, 1));
 }
 
 /// Control Flow
@@ -83,10 +84,10 @@ fn ln_ctrl(val: isize) {
     for e in ['a', 'b', 'c'].iter() {
         print!("{} ", e);
     }
-    for i in 1..3 {
+    for i in 1..3 { // 1 <= i < 3
         print!("{} ", i);
     }
-    for i in 3..=5 {
+    for i in 3..=5 { // 3 <= i <= 5
         print!("{} ", i);
     }
     println!("for");
