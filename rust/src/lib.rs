@@ -10,11 +10,12 @@
 pub mod basic;
 pub mod ownership;
 pub mod structure;
+pub mod enumeration;
 
 
 pub mod info {
     pub fn name() -> &'static str {
-        "lurst"
+        "lurust"
     }
     pub fn ver() -> &'static str {
         "0.1.0"
