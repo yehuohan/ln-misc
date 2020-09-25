@@ -18,6 +18,7 @@ pub mod ownership;
 pub mod structure;
 pub mod enumeration;
 pub mod collections;
+pub mod panic;
 
 
 pub mod info {

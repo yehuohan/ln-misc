@@ -4,6 +4,7 @@ use lnrust::ownership;
 use lnrust::structure;
 use lnrust::enumeration;
 use lnrust::collections;
+use lnrust::panic;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -12,4 +13,5 @@ pub fn main() {
     structure::run();
     enumeration::run();
     collections::run();
+    panic::run();
 }
