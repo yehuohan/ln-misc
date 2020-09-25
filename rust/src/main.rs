@@ -3,6 +3,7 @@ use lnrust::basic;
 use lnrust::ownership;
 use lnrust::structure;
 use lnrust::enumeration;
+use lnrust::collections;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -10,4 +11,5 @@ pub fn main() {
     ownership::run();
     structure::run();
     enumeration::run();
+    collections::run();
 }
