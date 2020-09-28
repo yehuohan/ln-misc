@@ -9,7 +9,7 @@ struct Size(u32, u32);
 #[derive(Debug)]
 pub struct Img {
     // 定义结构体{key:type, ...}
-    tag: String,
+    pub tag: String, // 添加pub属性，可以由结构体直接访问
     dep: u8,
     size: Size,
     channel: u8,

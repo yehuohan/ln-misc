@@ -19,6 +19,9 @@ pub mod structure;
 pub mod enumeration;
 pub mod collections;
 pub mod panic;
+pub mod generics;
+pub mod traits;
+pub mod lifetime;
 
 
 pub mod info {
