@@ -1,4 +1,4 @@
-//! 自动测试
+//! 自动化单元测试
 
 
 fn func_add(a: i32, b: i32) -> i32 {
@@ -9,9 +9,10 @@ fn func_max(a: i32, b: i32) -> i32 {
     if a >= b { a } else { b }
 }
 
-pub fn run() {
+pub fn run() -> bool{
     println!("add(1, 2) = {}", func_add(1, 2));
     println!("max(1, 2) = {}", func_max(1, 2));
+    true
 }
 
 
