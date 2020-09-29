@@ -22,6 +22,7 @@ pub mod panic;
 pub mod generics;
 pub mod traits;
 pub mod lifetime;
+pub mod autotests;
 
 
 pub mod info {
@@ -32,3 +33,4 @@ pub mod info {
         "0.1.0"
     }
 }
+

@@ -8,6 +8,7 @@ use lnrust::panic;
 use lnrust::generics;
 use lnrust::traits;
 use lnrust::lifetime;
+use lnrust::autotests;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -24,4 +25,6 @@ pub fn main() {
     generics::run();
     traits::run();
     lifetime::run();
+
+    autotests::run();
 }
