@@ -19,6 +19,7 @@ pub mod panic;
 pub mod generics;
 pub mod autotests;
 pub mod cmdbin;
+pub mod functional;
 
 
 pub mod info {
