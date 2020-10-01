@@ -20,7 +20,7 @@ impl Img {
     pub fn new(tag: String) -> Img {
         // 创建结构体{key:value, ...}
         Img {
-            tag, // 字段初始化，和参数同名，不用于写一次
+            tag, // 字段初始化，变量和结构体域段同名
             dep: 2,
             size: Size(5, 5),
             channel: 3,

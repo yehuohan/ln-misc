@@ -23,6 +23,7 @@ pub mod generics;
 pub mod traits;
 pub mod lifetime;
 pub mod autotests;
+pub mod cmdbin;
 
 
 pub mod info {

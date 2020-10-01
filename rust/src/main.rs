@@ -9,6 +9,7 @@ use lnrust::generics;
 use lnrust::traits;
 use lnrust::lifetime;
 use lnrust::autotests;
+use lnrust::cmdbin;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -27,4 +28,5 @@ pub fn main() {
     lifetime::run();
 
     autotests::run();
+    cmdbin::main();
 }
