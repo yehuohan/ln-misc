@@ -5,9 +5,9 @@
 
 use std::fmt::Display;
 use std::fmt::Debug;
-use crate::structure::Img;
-use crate::enumeration::Color;
-use crate::generics::Point;
+use crate::basic::structure::Img;
+use crate::basic::enumeration::Color;
+use crate::generics::syntax::Point;
 
 /// 定义trait
 pub trait Painter {

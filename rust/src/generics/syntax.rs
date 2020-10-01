@@ -1,4 +1,4 @@
-//! generics泛型
+//! 泛型基本语法
 
 /// 范型结构体
 #[derive(Debug)]

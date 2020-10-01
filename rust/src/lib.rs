@@ -14,14 +14,9 @@
 // bin(main.rs)使用mod，需要用 use lnrust::<mod>
 // lib(<mod>.rs)相互之间使用mod，可以用 use crate::<mod>
 pub mod basic;
-pub mod ownership;
-pub mod structure;
-pub mod enumeration;
 pub mod collections;
 pub mod panic;
 pub mod generics;
-pub mod traits;
-pub mod lifetime;
 pub mod autotests;
 pub mod cmdbin;
 

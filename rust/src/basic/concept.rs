@@ -1,4 +1,4 @@
-//! rust基本语法
+//! rust基本变量操作
 #![allow(unused_variables)] // 允许未使用的变量（作用于整个mod）
 
 
