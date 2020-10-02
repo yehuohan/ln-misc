@@ -1,3 +1,5 @@
+#![allow(unused_imports)]
+
 use lnrust::info;
 use lnrust::basic;
 use lnrust::collections;

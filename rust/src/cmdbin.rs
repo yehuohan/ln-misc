@@ -26,6 +26,21 @@ pub mod minigrep {
             let case_sensitive = env::var("CASE_SENSITIVE").is_ok(); // 根据环境变量设置参数
             Config {query, filename, case_sensitive} // 字段初始化，变量和结构体域段同名
         }
+
+        /// 使用迭代器改进new的实现，避使Vec和clone
+        pub fn new_i(mut args: std::env::Args) -> Config {
+            args.next();
+            let query = match args.next() {
+                Some(a) => a,
+                None => String::from("are"),
+            };
+            let filename = match args.next() {
+                Some(a) => a,
+                None => String::from("poem.txt")
+            };
+            let case_sensitive = env::var("CASE_SENSITIVE").is_ok(); // 根据环境变量设置参数
+            Config {query, filename, case_sensitive} // 字段初始化，变量和结构体域段同名
+        }
     }
 
     pub fn run(config: Config) -> Result<(), Box<dyn error::Error>> {
@@ -42,9 +57,10 @@ pub fn main() {
     use minigrep::*; // 引入minigrep模块
 
     let args: Vec<String> = env::args().collect(); // 获取命令行参数
-    println!("{:?}", args);
-
     let config = Config::new(&args); // 解析命令行参数
+    println!("{:?}", config);
+
+    let config = Config::new_i(env::args()); // 解析命令行参数
     println!("{:?}", config);
 
     if let Err(e) = run(config) {
