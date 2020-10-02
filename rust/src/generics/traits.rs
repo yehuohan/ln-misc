@@ -1,4 +1,6 @@
-//! Trait
+//! Trait告诉rust编译器某个特定类型拥有可能与其他类型共享的功能；
+//! 可以通过trait以一种抽象的方式定义共享的行为；
+//! 可以使用trait bounds指定泛型是任何拥有特定行为的类型。
 
 #![allow(dead_code)]
 #![allow(unused_variables)]

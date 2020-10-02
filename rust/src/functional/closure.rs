@@ -11,7 +11,7 @@ fn ln_closure() {
     //println!("closure: {}", ret3('3')); // error: 2次调用ret3的参数类型不同，会出现类型错误
 }
 
-/// 结构体储存闭包，需要指定闭包的类型，即实现Fn系列Trait
+/// 结构体储存闭包，需要指定闭包的类型，即实现Fn系列trait
 struct Calculator<T>
 where T: Fn(u32) -> u32 {
     calculating: T,
@@ -21,7 +21,7 @@ where T: Fn(u32) -> u32 {
 /// 使用闭包和结构体，实现惰性求值
 impl<T> Calculator<T>
 where T: Fn(u32) -> u32 {
-    /// 泛型T是一个使用Fn Trait的闭包
+    /// 泛型T是一个使用Fn trait的闭包
     fn new(calculating: T) -> Calculator<T> {
         Calculator {
             calculating,
@@ -62,7 +62,7 @@ fn func_closure() {
     println!("call value2: {}", calc_value.value(6)); // 第2次调用没有执行闭包代码，但是value也无法再更改
 }
 
-/// 闭包捕获环境变量，有3种捕方式，对应3个Fn Trait；
+/// 闭包捕获环境变量，有3种捕方式，对应3个Fn trait；
 /// FnOnce: 从环境获取所有权
 /// FnMut: 从环境获取可变的借用值
 /// Fn: 从环境获取不可变的借用值

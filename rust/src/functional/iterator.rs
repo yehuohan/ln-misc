@@ -1,6 +1,6 @@
 //! 迭代器负责遍历序列中的每一项和决定序列何时结束的逻；
-//! 迭代器实现了一个叫做Iterator的定义于标准库的Trait。
-//! 迭代器Trait需要实现next方法，返回Item类型，封装在Option中；
+//! 迭代器实现了一个叫做Iterator的定义于标准库的trait。
+//! Iterator trait需要实现next方法，返回Item类型，封装在Option中；
 //! 当迭代器结束时，它返回None。
 //!
 //! ```
@@ -37,7 +37,7 @@ fn iter_next() {
     assert_eq!(vi.next(), None);
 }
 
-/// 实现自定议迭代器，即需要实现Iterator Trait，以及next方法
+/// 实现自定议迭代器，即需要实现Iterator trait，以及next方法
 struct Counter {
     pub cnt: u32,
     pub max: u32,
@@ -78,7 +78,7 @@ pub fn run() {
     let u: Vec<_> = vi.collect(); // 迭代器是惰性求值的，需要使用collect方法将结果收集起来
     println!("{:?}", u);
 
-    // 实现了Iterator Trait，则可以使用标准库中定义的拥有默认实现的方法了
+    // 实现了Iterator trait，则可以使用标准库中定义的拥有默认实现的方法了
     let c: Vec<u32> = Counter::new(10).zip(Counter::new(9).skip(1))
         .map(|(a, b)| a * b)
         .filter(|x| x % 3 == 0)

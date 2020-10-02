@@ -38,12 +38,12 @@ fn ln_type() {
     /* tuple */
     let tup = (10, 1.23, "string");
     let (x, _, _) = tup;
-    println!("{}", x);
+    println!("tup: {}, {}", x, tup.1);
 
     /* array */
     let arr: [i32; 5] = [1, 2, 3, 4, 5]; // 指定元素类型和长度
     let brr = [-1; 5]; // 元素初始为-1
-    println!("{},{}", arr[0], brr[2]);
+    println!("arr: {},{}", arr[0], brr[2]);
 
     /* function */
     fn add(args: i32, brgs: u16) -> usize {
