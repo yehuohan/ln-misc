@@ -3,3 +3,17 @@
 [[package]]
 name = "lnrust"
 version = "0.1.0"
+dependencies = [
+ "wkslib",
+]
+
+[[package]]
+name = "wksbin"
+version = "0.1.0"
+dependencies = [
+ "wkslib",
+]
+
+[[package]]
+name = "wkslib"
+version = "0.1.0"

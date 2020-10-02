@@ -2,8 +2,25 @@
 name = "lnrust"
 version = "0.1.0"
 authors = ["lrx"]
+description = "learning rust"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+# 工作空间（workspace）是一系列共享同样的Cargo.lock和输出目录的包
+[workspace]
+members = [
+    "wksbin",
+    "wkslib"
+]
+
+# cargo build/run 使用dev配置
+[profile.dev]
+opt-level = 0
+
+# cargo build/run --release默认使用release配置
+[profile.release]
+opt-level = 3
+
 [dependencies]
+wkslib = {path = "wkslib"} # 内部crate库依赖

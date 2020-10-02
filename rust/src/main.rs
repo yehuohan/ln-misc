@@ -8,6 +8,7 @@ use lnrust::generics;
 use lnrust::autotests;
 use lnrust::cmdbin;
 use lnrust::functional;
+use wkslib;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -21,4 +22,5 @@ pub fn main() {
     cmdbin::main();
 
     functional::run();
+    println!("wks: {}", wkslib::add_one(1));
 }
