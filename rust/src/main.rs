@@ -7,8 +7,9 @@ use lnrust::panic;
 use lnrust::generics;
 use lnrust::autotests;
 use lnrust::cmdbin;
-use lnrust::functional;
 use wkslib;
+use lnrust::functional;
+use lnrust::smart_pointer;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -20,7 +21,8 @@ pub fn main() {
 
     autotests::run();
     cmdbin::main();
+    println!("wks: {}", wkslib::add_one(1));
 
     functional::run();
-    println!("wks: {}", wkslib::add_one(1));
+    smart_pointer::run();
 }

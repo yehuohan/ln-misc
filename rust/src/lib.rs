@@ -1,8 +1,8 @@
 //! 学习rust笔记
 //!
 //! 参考：
-//! - https://doc.rust-lang.org/book/
-//! - https://github.com/KaiserY/rust-book-chinese
+//! - [rust book](https://doc.rust-lang.org/book/)
+//! - [rust book zh-cn](https://github.com/KaiserY/rust-book-chinese)
 
 // 一个package有一个Cargo.toml来描述如何构建这些crate；
 // 一个package可以包含多个crate bin，但至多包含一个crate lib；
@@ -20,6 +20,7 @@ pub mod generics;
 pub mod autotests;
 pub mod cmdbin;
 pub mod functional;
+pub mod smart_pointer;
 
 
 pub mod info {
