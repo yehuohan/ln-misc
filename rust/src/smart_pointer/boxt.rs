@@ -20,6 +20,7 @@ struct ListS {
     next: Option<Box<ListS>>,
     data: i32,
 }
+
 enum ListE {
     Cons(i32, Box<ListE>),
     Nil,
@@ -42,7 +43,7 @@ fn recursive_type() {
     }
 
     // 使用ListE
-    use crate::smart_pointer::boxt::ListE::{Cons, Nil};
+    use self::ListE::{Cons, Nil};
     let list = Cons(1,
         Box::new(Cons(2,
                 Box::new(Cons(3,

@@ -13,7 +13,7 @@ pub struct MyBox<T>(T);
 
 impl<T> MyBox<T> {
     pub fn new(x: T) -> MyBox<T> {
-        MyBox(x)
+        MyBox(x) // 这里x仍是放在栈上，只是用于讲解Deref trait
     }
 }
 

@@ -16,10 +16,14 @@
 pub mod boxt;
 pub mod deref;
 pub mod drop;
+pub mod rc;
+pub mod refcell;
 
 pub fn run() {
     boxt::run();
     deref::run();
     drop::run();
+    rc::run();
+    refcell::run();
 }
 
