@@ -10,6 +10,7 @@ use lnrust::cmdbin;
 use wkslib;
 use lnrust::functional;
 use lnrust::smart_pointer;
+use lnrust::concurrency;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -25,4 +26,5 @@ pub fn main() {
 
     functional::run();
     smart_pointer::run();
+    concurrency::run();
 }

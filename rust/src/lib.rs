@@ -21,6 +21,7 @@ pub mod autotests;
 pub mod cmdbin;
 pub mod functional;
 pub mod smart_pointer;
+pub mod concurrency;
 
 
 pub mod info {
