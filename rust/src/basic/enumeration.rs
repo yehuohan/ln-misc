@@ -39,7 +39,7 @@ fn enum_match() {
         Color::Black => println!("Black"),
         Color::GRAY(0) => println!("It's Black"), // 可以精确匹配的包含在枚举中的值
         Color::GRAY(0xff) => println!("It's White"),
-        Color::GRAY(val) => println!{"Gray = {}", val}, // 也可以将枚举中的值绑定给变量
+        Color::GRAY(val) => println!("Gray = {}", val), // 也可以将枚举中的值绑定给变量
         _ => (),
     }
 

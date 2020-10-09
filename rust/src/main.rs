@@ -12,6 +12,7 @@ use lnrust::functional;
 use lnrust::smart_pointer;
 use lnrust::concurrency;
 use lnrust::oop;
+use lnrust::pattern;
 
 pub fn main() {
     println!("{}, {}", info::name(), info::ver());
@@ -29,4 +30,5 @@ pub fn main() {
     smart_pointer::run();
     concurrency::run();
     oop::run();
+    pattern::run();
 }

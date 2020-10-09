@@ -3,8 +3,8 @@
 /// 范型结构体
 #[derive(Debug)]
 pub struct Point<T> {
-    x: T,
-    y: T,
+    pub x: T,
+    pub y: T,
 }
 
 /// 范型结构体的方法
