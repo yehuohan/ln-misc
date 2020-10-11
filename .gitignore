@@ -12,5 +12,3 @@ __pycache__
 !exercise
 !gists
 !rust
-rust/target
-!.gitignore
