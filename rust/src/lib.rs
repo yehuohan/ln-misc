@@ -24,6 +24,7 @@ pub mod smart_pointer;
 pub mod concurrency;
 pub mod oop;
 pub mod pattern;
+pub mod advanced;
 
 
 pub mod info {
