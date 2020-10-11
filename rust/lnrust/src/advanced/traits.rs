@@ -52,8 +52,8 @@ impl Iterator1 for Prime {
     }
 }
 
-/// 使用范型实现迭代器，可以为Prime实现不同类型的Iterator2
-trait Iterator2<T=u32> { // trait的范型参数可以带默认参数；
+/// 使用泛型实现迭代器，可以为Prime实现不同类型的Iterator2
+trait Iterator2<T=u32> { // trait的泛型参数可以带默认参数；
     fn next(&mut self) -> Option<T>;
     fn name() -> String;
 }

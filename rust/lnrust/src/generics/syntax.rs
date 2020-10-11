@@ -1,13 +1,13 @@
 //! 泛型基本语法
 
-/// 范型结构体
+/// 泛型结构体
 #[derive(Debug)]
 pub struct Point<T> {
     pub x: T,
     pub y: T,
 }
 
-/// 范型结构体的方法
+/// 泛型结构体的方法
 impl<T> Point<T> {
     pub fn get_x(&self) -> &T {
         &self.x
