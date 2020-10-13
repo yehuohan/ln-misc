@@ -3,6 +3,8 @@
 //! 参考：
 //! - [rust book](https://doc.rust-lang.org/book/)
 //! - [rust book zh-cn](https://github.com/KaiserY/rust-book-chinese)
+//! - [rust reference](https://doc.rust-lang.org/reference/)
+//! - [rust官网文档](https://www.rust-lang.org/zh-CN/learn)
 
 // 一个package有一个Cargo.toml来描述如何构建这些crate；
 // 一个package可以包含多个crate bin，但至多包含一个crate lib；
