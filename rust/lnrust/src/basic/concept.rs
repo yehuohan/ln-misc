@@ -34,6 +34,9 @@ fn ln_type() {
     let h: char = 'ℤ';
     let i: char = '😻';
     println!("{}, {}", h, i);
+    println!(r#"
+        This is raw string.
+    "#);
 
     /* tuple */
     let tup = (10, 1.23, "string");

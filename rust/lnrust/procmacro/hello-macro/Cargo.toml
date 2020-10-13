@@ -1,0 +1,15 @@
+[package]
+name = "hello-macro"
+version = "0.1.0"
+authors = ["lrx"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+#name = "hello_macro" # 生成用于`use <name>`或`extern crate <name>`目标库的名称（默认是包名，且将所有破折号替换为下划线）
+proc-macro = true
+
+[dependencies]
+syn = "0.15.44"
+quote = "0.6.13"

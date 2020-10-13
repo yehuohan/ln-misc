@@ -11,7 +11,10 @@ edition = "2018"
 [workspace]
 members = [
     "wksbin",
-    "wkslib"
+    "wkslib",
+    "procmacro",
+    "procmacro/hello",
+    "procmacro/hello-macro",
 ]
 
 # cargo build/run 使用dev配置
@@ -24,3 +27,6 @@ opt-level = 3
 
 [dependencies]
 wkslib = {path = "wkslib"} # 内部crate库依赖
+procmacro = {path = "procmacro"}
+hello = {path = "procmacro/hello"}
+hello-macro = {path = "procmacro/hello-macro"}
