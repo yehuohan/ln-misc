@@ -12,10 +12,38 @@
 use std::thread;
 use std::time::Duration;
 
-/// 使用thread::spawn创建线程
-pub fn run() {
+/// 使用spawn创建线程
+///
+/// spawn接受一个闭包或函数（不能带参数），返回值的类型，也是join的返回；
+/// FnOnce需要保证闭包对于访问的外部变量拥有所有权；
+///
+/// ```
+/// pub fn spawn<F, T>(f: F) -> JoinHandle<T>
+/// where
+///     F: FnOnce() -> T,
+///     F: Send + 'static,
+///     T: Send + 'static,
+/// ```
+///
+/// 设置线程函数的方法：
+/// - 使用闭包；
+/// - 使用函数，但是函数不能带参数；
+/// - 在闭包中调用函数（间接达到传递参数的目的）；
+fn ln_spawn() {
+    let jh = thread::spawn (|| {
+        println!("in thread closure: by closure");
+        "return closure" // 返回&str
+    });
+    println!("{}", jh.join().unwrap());
+
+    let jh = thread::spawn(thread_func1); // 函数不能有参数
+    println!("{}", jh.join().unwrap()); // join的返回值即为thread_func1的返回
+
+    let jh = thread::spawn(|| thread_func2("by closure")); // 在闭包里调用函数，从而传递参数
+    jh.join().unwrap();
+
     let v = vec![-1, 2, -3, 4, -5, 6];
-    let handle = thread::spawn(move || { // 将v的所有权转移到新开线程中
+    let jh = thread::spawn(move || { // 使用move表进这个是个FnOnce闭包，将v的所有权转移到新开线程中
         for i in v {
             println!("thread: {}", i);
             thread::sleep(Duration::from_millis(1));
@@ -26,5 +54,19 @@ pub fn run() {
         println!("main: {}", i);
         thread::sleep(Duration::from_millis(1));
     }
-    handle.join().unwrap();
+    jh.join().unwrap();
+}
+
+fn thread_func1() -> i32 {
+    println!("in thread func1: by fn");
+    1
+}
+
+fn thread_func2(text: &str) {
+    println!("in thread func2: {}", text);
+}
+
+
+pub fn run() {
+    ln_spawn();
 }

@@ -1,9 +1,15 @@
 //! 学习rust笔记
 //!
-//! 参考：
+//! ## 关于rust标准库
+//!
+//! - core: 是std库的基础，同时core不任何依赖其它库（包括系统、libc等库）
+//! - std: rust标准备库，std包括core里面的内容（开发操作系统时，没法使用std，但可以使用core）
+//!
+//! ## 参考：
 //! - [rust book](https://doc.rust-lang.org/book/)
 //! - [rust book zh-cn](https://github.com/KaiserY/rust-book-chinese)
 //! - [rust reference](https://doc.rust-lang.org/reference/)
+//! - [rust std crate](https://doc.rust-lang.org/std/index.html)
 //! - [rust官网文档](https://www.rust-lang.org/zh-CN/learn)
 
 // 一个package有一个Cargo.toml来描述如何构建这些crate；
