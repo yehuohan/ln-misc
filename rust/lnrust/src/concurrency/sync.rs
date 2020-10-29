@@ -8,9 +8,7 @@
 
 use std::thread;
 use std::time::Duration;
-use std::sync::mpsc;
-use std::sync::Mutex;
-use std::sync::Arc;
+use std::sync::{mpsc, Mutex, Arc, Condvar};
 
 
 /// 使用mpsc::channel在线程间传递消息；
@@ -72,11 +70,14 @@ fn ln_channel() {
 /// Arc<T>是一个类似Rc<T>，但可以安全的用于并发环境的类型。
 fn ln_mutex() {
     let m = Mutex::new(5); // Mutex内部放一个i32数据
-    {
-        let mut num = m.lock().unwrap(); // lock会阻塞当前线程，直至返回指向内部数据的可变引用
-        *num = 6;
-    }
     println!("m: {:?}", m);
+    {
+        let mut num = m.lock().unwrap(); // lock会阻塞当前线程，并返回指向内部数据的可变引用
+        *num = 6;
+        std::mem::drop(num); // Drop智能指针，达到主动释放锁的目的
+        println!("num: {}", m.lock().unwrap()); // 不释放锁的话，这里会死锁
+    }
+    println!("num: {}", m.lock().unwrap()); // 或者通过{}构造作用域，防止死锁
 
     let cnt = Arc::new(Mutex::new(0));
     let mut handles = vec![];
@@ -96,7 +97,47 @@ fn ln_mutex() {
 }
 
 
+/// 条件量（condvar），用于同步。
+fn ln_condvar() {
+    let pair = Arc::new((Mutex::new(0), Condvar::new()));
+    let pairc = pair.clone();
+
+    let wait = thread::spawn(move || {
+        let (lock, cvar) = &*pairc;
+        loop {
+            let mut val = lock.lock().unwrap();
+            println!("wait cvar");
+            //val = cvar.wait_timeout(val, Duration::from_millis(10)).unwrap().0;
+            val = cvar.wait(val).unwrap();
+            println!("wait: {}", val);
+            if *val >= 5 { break; } // 直到val足够大时，退出线程
+        }
+    });
+
+    let (lock, cvar) = &*pair;
+    loop {
+        // notify线程中需要sleep，不然notify break后，wait线程才wait cvar，
+        // 从而导致cvar.wait()会一直等待下去（除非使用wait_timeout）
+        thread::sleep(Duration::from_millis(100)); // 这里还未获取锁，故wait线程中可以获取锁，且运行到wait cvar
+        let mut val = lock.lock().unwrap();
+        *val += 1;
+        cvar.notify_one();
+        println!("notify: {}", val);
+        if *val >= 5 {
+            println!("notify break");
+            break;
+        }
+
+        // 若在这里sleep，需要主动释放锁，不然notify线程在sleep期间依然占着锁，
+        // 从而导到wait线程中拿不到锁，运行不到cvar.wait()
+        //std::mem::drop(val);
+        //thread::sleep(Duration::from_millis(100));
+    }
+    wait.join().unwrap();
+}
+
 pub fn run() {
     ln_channel();
     ln_mutex();
+    ln_condvar()
 }
