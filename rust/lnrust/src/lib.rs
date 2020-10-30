@@ -11,6 +11,7 @@
 //! - [rust reference](https://doc.rust-lang.org/reference/)
 //! - [rust std crate](https://doc.rust-lang.org/std/index.html)
 //! - [rust官网文档](https://www.rust-lang.org/zh-CN/learn)
+//! - [tomal语法](https://toml.io/cn)
 
 // 一个package有一个Cargo.toml来描述如何构建这些crate；
 // 一个package可以包含多个crate bin，但至多包含一个crate lib；
@@ -35,6 +36,8 @@ pub mod pattern;
 pub mod advanced;
 
 
+#[cfg(feature = "info")]
+#[cfg(feature = "ver")]
 pub mod info {
     pub fn name() -> &'static str {
         "lurust"

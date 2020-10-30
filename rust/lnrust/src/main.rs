@@ -1,6 +1,10 @@
 #![allow(unused_imports)]
 
+
+#[cfg(feature = "info")]
+#[cfg(feature = "ver")]
 use lnrust::info;
+
 use lnrust::basic;
 use lnrust::collections;
 use lnrust::panic;
@@ -17,6 +21,8 @@ use lnrust::advanced;
 
 
 pub fn main() {
+    #[cfg(feature = "info")]
+    #[cfg(feature = "ver")]
     println!("{}, {}", info::name(), info::ver());
 
     basic::run();
