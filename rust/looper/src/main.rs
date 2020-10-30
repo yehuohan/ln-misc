@@ -7,7 +7,7 @@ struct ExMsg {
 
 impl LooperMsg for ExMsg {
     fn handle_message(self) {
-        println!("val: {}", self.val);
+        println!("msg val: {}", self.val);
     }
 }
 
@@ -18,6 +18,7 @@ fn main() {
     lp.send_msg_delay(ExMsg {val: 2}, std::time::Duration::from_millis(800));
     lp.send_msg_delay(ExMsg {val: 1}, std::time::Duration::from_millis(1000));
     lp.send_msg_delay(ExMsg {val: 5}, std::time::Duration::from_millis(200));
+
     std::thread::sleep(std::time::Duration::from_secs(2));
     lp.terminate();
 }

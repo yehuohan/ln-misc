@@ -8,8 +8,8 @@ use std::time::Duration;
 use crate::handler::{Handler, HandlerMsg};
 
 
-/// 使用链表存储消息
-type Messages<T> = Arc<Mutex<LinkedList<HandlerMsg<T>>>>;
+/// 消息队列
+type Messages<T> = Arc<(Mutex<LinkedList<HandlerMsg<T>>>, Condvar)>;
 
 
 /// Looper对象
@@ -31,8 +31,9 @@ pub trait LooperMsg {
 impl<T: LooperMsg + Send + 'static> Looper<T> {
     /// 创建looper
     pub fn new() -> Looper<T> {
-        let msgs = Arc::new(Mutex::new(LinkedList::new()));
-        let handler = Handler::new(msgs.clone());
+        //let msgs = Arc::new(Mutex::new(LinkedList::new()));
+        let msgs = Arc::new((Mutex::new(LinkedList::new()), Condvar::new()));
+        let mut handler = Handler::new(msgs.clone());
         let thread = thread::spawn(move || handler.run());
         Looper {
             msgs: msgs.clone(),
@@ -42,11 +43,13 @@ impl<T: LooperMsg + Send + 'static> Looper<T> {
 
     /// 向looper发送消息
     pub fn send_msg(&self, msg: T) {
-        self.put_msg(HandlerMsg::new(Option::<T>::Some(msg), 0));
+        self.put_msg(HandlerMsg::new(Option::<T>::Some(msg), Duration::from_millis(0)));
     }
 
+    /// 向looper发送延时消息
+    /// - delay: 延时时间
     pub fn send_msg_delay(&self, msg: T, delay: Duration) {
-        self.put_msg(HandlerMsg::new(Option::<T>::Some(msg), delay.as_millis()));
+        self.put_msg(HandlerMsg::new(Option::<T>::Some(msg), delay));
     }
 
     /// 发送停止运行消息
@@ -57,18 +60,26 @@ impl<T: LooperMsg + Send + 'static> Looper<T> {
         }
     }
 
-    /// 根据执行时刻插入消息，使用插入排序算法
+    /// 根据执行时刻插入消息，使用插入排序算法；
+    /// 有新消息插入时，会通知handler更新wait时间。
     fn put_msg(&self, hmsg: HandlerMsg<T>) {
-        if let Ok(mut lst) = self.msgs.lock() {
+        let (lock, cvar) = &*self.msgs;
+        if let Ok(mut lst) = lock.lock() {
+            // 获取锁，插入消息
             let mut cur = lst.cursor_front_mut();
             while let Some(msg) = cur.current() {
-                if hmsg.when >= msg.when {
+                if hmsg.when >= msg.when { // 消息是按时间排序的，依次比较即可
                     cur.move_next()
                 } else {
                     break;
                 }
             }
             cur.insert_before(hmsg);
+
+            #[cfg(feature = "debug")]
+            println!("cvar notify");
+
+            cvar.notify_one();
         }
     }
 }
