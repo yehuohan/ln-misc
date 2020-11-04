@@ -30,12 +30,12 @@ pub trait LooperMsg {
 
 impl<T: LooperMsg + Send + 'static> Looper<T> {
     /// 创建looper
-    pub fn new() -> Looper<T> {
+    pub fn new() -> Self {
         //let msgs = Arc::new(Mutex::new(LinkedList::new()));
         let msgs = Arc::new((Mutex::new(LinkedList::new()), Condvar::new()));
         let mut handler = Handler::new(msgs.clone());
         let thread = thread::spawn(move || handler.run());
-        Looper {
+        Self {
             msgs: msgs.clone(),
             thread: Some(thread),
         }

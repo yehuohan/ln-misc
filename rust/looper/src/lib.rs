@@ -82,5 +82,4 @@ mod tests {
             assert_eq!(VAL, vec![5, 4, 3, 2, 1]);
         }
     }
-
 }

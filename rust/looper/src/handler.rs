@@ -41,8 +41,8 @@ where
 
 impl<T: LooperMsg + Send + 'static> Handler<T> {
     /// 创建handler
-    pub fn new(msgs: Messages<T>) -> Handler<T> {
-        Handler {
+    pub fn new(msgs: Messages<T>) -> Self {
+        Self {
             msgs,
             wait: Duration::from_millis(1), // 初始时间很小，防止handler还未处理wait状态，looper就已经notify了
         }
@@ -100,8 +100,8 @@ impl<T: LooperMsg + Send + 'static> Handler<T> {
 }
 
 impl<T: LooperMsg + Send + 'static> HandlerMsg<T> {
-    pub fn new(looper_msg: Option<T>, delay: Duration) -> HandlerMsg<T> {
-        HandlerMsg {
+    pub fn new(looper_msg: Option<T>, delay: Duration) -> Self {
+        Self {
             hmtype: HandlerMsgType::Message,
             when: SystemTime::now()
                     .duration_since(SystemTime::UNIX_EPOCH)
@@ -110,8 +110,8 @@ impl<T: LooperMsg + Send + 'static> HandlerMsg<T> {
         }
     }
 
-    pub fn with_terminate() -> HandlerMsg<T> {
-        HandlerMsg {
+    pub fn with_terminate() -> Self {
+        Self {
             hmtype: HandlerMsgType::Terminate,
             when: SystemTime::now()
                     .duration_since(SystemTime::UNIX_EPOCH)
