@@ -7,9 +7,11 @@
 
 use std::fmt::Display;
 use std::fmt::Debug;
-use crate::basic::structure::Img;
-use crate::basic::enumeration::Color;
-use crate::generics::syntax::Point;
+use super::super::basic::{
+    structure::Img,
+    enumeration::Color,
+};
+use super::syntax::Point;
 
 /// 定义trait
 pub trait Painter {

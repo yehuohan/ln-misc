@@ -8,10 +8,13 @@
 //! ## 参考：
 //! - [rust book](https://doc.rust-lang.org/book/)
 //! - [rust book zh-cn](https://github.com/KaiserY/rust-book-chinese)
+//! - [rust by example](https://doc.rust-lang.org/rust-by-example/)
+//! - [rust by example zh-cn](https://rustwiki.org/zh-CN/rust-by-example)
 //! - [rust reference](https://doc.rust-lang.org/reference/)
 //! - [rust std crate](https://doc.rust-lang.org/std/index.html)
 //! - [rust官网文档](https://www.rust-lang.org/zh-CN/learn)
 //! - [tomal语法](https://toml.io/cn)
+
 
 // 一个package有一个Cargo.toml来描述如何构建这些crate；
 // 一个package可以包含多个crate bin，但至多包含一个crate lib；
@@ -22,28 +25,6 @@
 // 模块声明，内容在src/<mod>.rs或src/<mod>/mod.rs文件中
 // bin(main.rs)使用mod，需要用 use lnrust::<mod>
 // lib(<mod>.rs)相互之间使用mod，可以用 use crate::<mod>
-pub mod basic;
-pub mod collections;
-pub mod panic;
-pub mod generics;
-pub mod autotests;
-pub mod cmdbin;
-pub mod functional;
-pub mod smart_pointer;
-pub mod concurrency;
-pub mod oop;
-pub mod pattern;
-pub mod advanced;
 
-
-#[cfg(feature = "info")]
-#[cfg(feature = "ver")]
-pub mod info {
-    pub fn name() -> &'static str {
-        "lurust"
-    }
-    pub fn ver() -> &'static str {
-        "0.1.0"
-    }
-}
-
+pub mod book;
+//pub mod ref;

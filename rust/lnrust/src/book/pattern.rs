@@ -86,12 +86,12 @@ fn ln_match_range() {
 
 fn ln_match_destructure() {
     // 结构体、元组
-    use crate::generics::syntax::Point;
+    use super::generics::syntax::Point;
     let ((a, b), Point{x: c, y: d}) = ((0, 1), Point{x: 2, y: 3});
     println!("struct and enum: {}, {}, {}, {}", a, b, c, d);
 
     // 枚举
-    use crate::basic::enumeration::Color;
+    use super::basic::enumeration::Color;
     let a = Color::RGB{r:0, g:1, b:2};
     match a {
         Color::GRAY(v) => println!("color: {}", v),
@@ -113,7 +113,7 @@ fn ln_match_ignore() {
     }
 
     // ..忽略剩余值
-    use crate::basic::enumeration::Color;
+    use super::basic::enumeration::Color;
     let a = Color::RGB{r:0, g:1, b:2};
     match a {
         Color::RGB{r: 0, ..} => println!("color-r = 0"),
@@ -140,7 +140,7 @@ fn ln_match_extra_conditions() {
 
 fn ln_match_at_bindings() {
     // 运算符（@）允许我们在创建一个存放值变量的同时，测试其值是否匹配模式
-    use crate::basic::enumeration::Color;
+    use super::basic::enumeration::Color;
     let a = Color::RGB{r:0, g:1, b:2};
     match a {
         Color::RGB{r: _, g: _, b: bb @ 1..=3} => println!("Color-b: {}", bb),
