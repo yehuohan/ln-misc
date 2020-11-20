@@ -11,6 +11,7 @@
 //! - [rust by example](https://doc.rust-lang.org/rust-by-example/)
 //! - [rust by example zh-cn](https://rustwiki.org/zh-CN/rust-by-example)
 //! - [rust reference](https://doc.rust-lang.org/reference/)
+//! - [rust reference zh-cn](https://minstrel1977.gitee.io/rust-reference/introduction.html)
 //! - [rust std crate](https://doc.rust-lang.org/std/index.html)
 //! - [rust官网文档](https://www.rust-lang.org/zh-CN/learn)
 //! - [tomal语法](https://toml.io/cn)
