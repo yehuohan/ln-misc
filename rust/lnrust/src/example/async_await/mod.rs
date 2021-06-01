@@ -5,7 +5,9 @@
 //! [Async Book](https://rust-lang.github.io/async-book)
 
 mod aa;
+mod selfref;
 
 pub fn run() {
     aa::run();
+    selfref::run();
 }
