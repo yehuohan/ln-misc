@@ -29,3 +29,4 @@
 
 pub mod book;
 pub mod reference;
+pub mod example;

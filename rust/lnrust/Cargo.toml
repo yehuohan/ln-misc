@@ -30,6 +30,7 @@ wkslib = {path = "wkslib"} # 内部crate库依赖
 procmacro = {path = "procmacro"}
 hello = {path = "procmacro/hello"}
 hello-macro = {path = "procmacro/hello-macro"}
+futures = "0.3"
 
 [features]
 # 默认参数，Cargo会传递参数给rustc： --cfg feature="${feature_name}"

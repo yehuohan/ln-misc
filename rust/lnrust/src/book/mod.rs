@@ -18,7 +18,7 @@ pub mod advanced;
 #[cfg(feature = "ver")]
 pub mod info {
     pub fn name() -> &'static str {
-        "lurust"
+        "lnrust"
     }
     pub fn ver() -> &'static str {
         "0.1.0"
