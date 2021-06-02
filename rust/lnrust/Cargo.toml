@@ -4,6 +4,8 @@ version = "0.1.0"
 authors = ["lrx"]
 description = "learning rust"
 edition = "2018"
+# 编译package前执行的build脚本
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -31,6 +33,11 @@ procmacro = {path = "procmacro"}
 hello = {path = "procmacro/hello"}
 hello-macro = {path = "procmacro/hello-macro"}
 futures = "0.3"
+libc = "0.2.95"
+
+# build脚本依赖的crate库
+[build-dependencies]
+cc = "1.0.68"
 
 [features]
 # 默认参数，Cargo会传递参数给rustc： --cfg feature="${feature_name}"

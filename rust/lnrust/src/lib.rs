@@ -5,7 +5,7 @@
 //! - core: 是std库的基础，同时core不任何依赖其它库（包括系统、libc等库）
 //! - std: rust标准备库，std包括core里面的内容（开发操作系统时，没法使用std，但可以使用core）
 //!
-//! ## 参考：
+//! ## 参考
 //! - [rust book](https://doc.rust-lang.org/book/)
 //! - [rust book zh-cn](https://github.com/KaiserY/rust-book-chinese)
 //! - [rust by example](https://doc.rust-lang.org/rust-by-example/)
