@@ -32,13 +32,18 @@ fn ln_function_pointer(f: fn(i32, i32) -> i32, arg: (i32, i32)) {
     println!("status: {:?}, seq: {:?}", s, seqs);
 }
 
-/// 闭包表现为trait，这意味着不能直接返回闭包；
-/// 需要通过trait对象返回函数闭包；
+/// 闭包表现为trait，可以通过trait对象返回函数闭包；
 fn ln_return_closure() -> Box<dyn Fn(i32, i32) -> i32>{
     Box::new(|a, b| a + b)
 } 
 
+/// 也可以通过impl Trait语法返回；
+fn ln_return_closure2() -> impl Fn(i32, i32) -> i32 {
+    |a, b| a + b
+}
+
 pub fn run() {
     ln_function_pointer(add, (1, 2));
-    println!("ret add: {}, {}", (*ln_return_closure())(1, 2), ln_return_closure()(2, 3));
+    println!("ret closure add: {}, {}", (*ln_return_closure())(1, 2), ln_return_closure()(2, 3));
+    println!("ret closure2 add: {}", ln_return_closure2()(2, 3));
 }
