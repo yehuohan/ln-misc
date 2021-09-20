@@ -15,12 +15,16 @@
 //! DST类型需要通过指针使用，Trait Object即通过`&dyn SomeTrait`或`Box<dyn SomeTrait>`使用。
 
 use std::mem;
+use std::any::Any;
 
 trait TObj {
     fn func(&self);
 }
 
-struct Foo;
+struct Foo {
+    name: String,
+    data: usize,
+}
 
 impl TObj for Foo {
     fn func(&self) {
@@ -28,8 +32,12 @@ impl TObj for Foo {
     }
 }
 
-pub fn run() {
-    let foo = Foo;
+/// 分析Trait Object内部数据
+fn trait_object_mem() {
+    let foo = Foo {
+        name: String::from("foo"),
+        data: 123,
+    };
     let pfoo = &foo; // 指向Foo实例的指针
     let pobj = pfoo as &dyn TObj; // 指向Trait Object的“胖”指针，Trait Object的ptr指向实例foo
 
@@ -44,4 +52,23 @@ pub fn run() {
 
     let (ptr, vtable): (usize, usize) = unsafe { mem::transmute(pobj) };
     println!("Addr(pobj) = {{ptr:0x{:X}, vtable:0x{:X}}}", ptr, vtable);
+}
+
+/// Trait Object转换成实例
+fn trait_object_downcast(t: Box<dyn Any>) {
+    if let Ok(dt) = t.downcast::<Foo>() {
+        println!("Foo = {{name = {}, data = {}}}", (*dt).name, (*dt).data);
+    }
+}
+
+pub fn run() {
+    trait_object_mem();
+
+    let foo = Foo {
+        name: String::from("foo-downcast"),
+        data: 123,
+    };
+    // 这里Box用move语义（不然编译出错），
+    // 传参时，需要创建一个Box::new()，表示move的Box在stack中的内容，而heap中的不动
+    trait_object_downcast(Box::new(foo))
 }
